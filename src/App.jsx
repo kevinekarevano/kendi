@@ -1,5 +1,5 @@
 import { Button } from "./components/ui/button";
-import ImageCard from "./components/ui/imageCard";
+import ImageCard from "./components/ui/ImageCard";
 import { foodData } from "./foodData";
 import Form from "./components/Form";
 import { useRef } from "react";
@@ -12,7 +12,7 @@ function App() {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const item = [,"KENDI", ".", "KENDI", "." ,"KENDI", ".", "KENDI", "."];
+  const item = [, "KENDI", ".", "KENDI", ".", "KENDI", ".", "KENDI", "."];
 
   return (
     <div className="bg-[#FEF2E8]  h-full">
