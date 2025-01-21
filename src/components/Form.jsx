@@ -4,7 +4,8 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 
 const Form = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOrdered, setIsOrdered] = useState(false);
+  const [warning, setWarning] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,12 +14,14 @@ const Form = () => {
     const order = e.target.order.value;
 
     if (!name || !kelas || !order) {
-      alert("form tidak boleh kosong");
+      setWarning(true);
       return;
+    } else {
+        setWarning(false)
     }
 
     // console.log(name, kelas, order);
-
+    setIsOrdered(false);
     try {
       const res = await fetch(import.meta.env.VITE_API_GOOGLE_SHEETS, {
         method: "POST",
@@ -28,15 +31,19 @@ const Form = () => {
 
       const data = await res.json();
 
-    //   console.log(data);
+      //   console.log(data);
 
+      setIsOrdered(true);
       e.target.reset();
+
+      setTimeout(() => {
+        setIsOrdered(false);
+      }, 5000);
     } catch (error) {
       console.log(error);
+      setIsOrdered(false);
     }
   };
-
-  
 
   return (
     <form action="" onSubmit={() => handleSubmit(event)}>
@@ -58,10 +65,12 @@ const Form = () => {
         <label className="font-bold " htmlFor="pesanan">
           Pesanan
         </label>
-        <Textarea placeholder="contoh: Nasi Cumi 1, Es Teh 2" name="order" id=""></Textarea>
+        <Textarea placeholder="contoh: Nasi Cumi 1, Es Teh 2, Note : ..." name="order" id=""></Textarea>
+        {isOrdered && <p className="text-green-800 font-medium mt-2">Pesanan berhasil dikirim😎</p>}
+        {warning && <p className="text-red-800 font-medium mt-2">Form tidak boleh kosong..!</p>}
       </div>
 
-      <Button>ORDER</Button>
+      <Button className="w-full">ORDER</Button>
     </form>
   );
 };
