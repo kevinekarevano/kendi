@@ -6,6 +6,7 @@ import { useState } from "react";
 const Form = () => {
   const [isOrdered, setIsOrdered] = useState(false);
   const [warning, setWarning] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const Form = () => {
       setWarning(true);
       return;
     } else {
-        setWarning(false)
+      setWarning(false);
     }
 
     // console.log(name, kelas, order);
@@ -34,7 +35,6 @@ const Form = () => {
       //   console.log(data);
 
       setIsOrdered(true);
-      e.target.reset();
 
       setTimeout(() => {
         setIsOrdered(false);
@@ -42,6 +42,14 @@ const Form = () => {
     } catch (error) {
       console.log(error);
       setIsOrdered(false);
+
+      setFailed(true);
+
+      setTimeout(() => {
+        setFailed(false);
+      }, 2000);
+    } finally {
+      e.target.reset();
     }
   };
 
@@ -68,6 +76,7 @@ const Form = () => {
         <Textarea placeholder="contoh: Nasi Cumi 1, Es Teh 2, Note : ..." name="order" id=""></Textarea>
         {isOrdered && <p className="text-green-800 font-medium mt-2">Pesanan berhasil dikirim😎</p>}
         {warning && <p className="text-red-800 font-medium mt-2">Form tidak boleh kosong..!</p>}
+        {failed && <p className="text-red-800 font-medium mt-2">Gagal mengirim pesanan, periksa kembali jaringan anda..!</p>}
       </div>
 
       <Button className="w-full">ORDER</Button>
