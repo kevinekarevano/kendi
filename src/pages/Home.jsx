@@ -43,7 +43,7 @@ function Home() {
         </div>
       </div>
 
-      <footer className="flex justify-center mb-2 items-center">
+      <footer className="flex justify-center pb-2 items-center">
         <code className="text-sm">Made By 12 Teknik Komputer & Jaringan</code>
       </footer>
 
