@@ -70,7 +70,7 @@ const Form = () => {
       </div>
 
       <div className="mb-5">
-        <label className="font-bold" htmlFor="name">
+        <label className="font-bold" htmlFor="kelas">
           Kelas
         </label>
         <Input placeholder="contoh: 12 TKJ 1" type="text" name="kelas" id="kelas" />
@@ -80,7 +80,7 @@ const Form = () => {
         <label className="font-bold " htmlFor="pesanan">
           Pesanan
         </label>
-        <Textarea placeholder="contoh: Nasi Cumi 1, Es Teh 2, Note : ..." name="order" id=""></Textarea>
+        <Textarea placeholder="contoh: Nasi Cumi 1, Es Teh 2, Note : ..." name="order" id="pesanan"></Textarea>
         {isOrdered && <p className="text-green-800 font-medium mt-2">Pesanan berhasil dikirim😎</p>}
         {warning && <p className="text-red-800 font-medium mt-2">Form tidak boleh kosong..!</p>}
         {failed && <p className="text-red-800 font-medium mt-2">Gagal mengirim pesanan, periksa kembali jaringan anda..!</p>}
