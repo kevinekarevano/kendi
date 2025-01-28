@@ -2,11 +2,20 @@ import { useParams } from "react-router";
 import { foodData } from "../foodData";
 import ImageCard from "@/components/ui/ImageCard";
 import { Link } from "react-router";
+import { useEffect } from "react";
 
 const DetailMenu = () => {
   const { id } = useParams();
 
   const data = foodData.find((data) => data.id === parseInt(id));
+
+  useEffect(() => {
+    if (data) {
+      document.title = data.name;
+    } else {
+      document.title = "Produk tidak ditemukan";
+    }
+  }, [data]);
 
   if (!data) {
     return (

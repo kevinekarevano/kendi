@@ -33,7 +33,7 @@ const Form = () => {
         body: JSON.stringify([[name, kelas, order, new Date().toLocaleString()]]),
       });
 
-      const data = await res.json();
+      // const data = await res.json();
 
       //   console.log(data);
 
@@ -61,7 +61,7 @@ const Form = () => {
   };
 
   return (
-    <form action="" onSubmit={() => handleSubmit(event)}>
+    <form action=""  onSubmit={() => handleSubmit(event)}>
       <div className="mb-5">
         <label className="font-bold" htmlFor="name">
           Nama
@@ -93,7 +93,7 @@ const Form = () => {
         <input type="text" name="honeypot" id="honeypot" />
       </div>
 
-      <ReCAPTCHA onChange={handleCaptchaChange} sitekey={import.meta.env.VITE_RECAPTCHA_SECRET_KEY} />
+      <ReCAPTCHA  onChange={handleCaptchaChange} sitekey={import.meta.env.VITE_RECAPTCHA_SECRET_KEY} />
 
       <Button disabled={!capVal} className="w-full mt-5">
         ORDER
