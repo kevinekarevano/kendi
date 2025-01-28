@@ -2,19 +2,22 @@ import { Input } from "./ui/Input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Form = () => {
   const [isOrdered, setIsOrdered] = useState(false);
   const [warning, setWarning] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [capVal, setCapVal] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const kelas = e.target.kelas.value;
     const order = e.target.order.value;
+    const honeyPot = e.target.honeypot.value;
 
-    if (!name || !kelas || !order) {
+    if (!name || !kelas || !order || honeyPot) {
       setWarning(true);
       return;
     } else {
@@ -53,6 +56,10 @@ const Form = () => {
     }
   };
 
+  const handleCaptchaChange = (value) => {
+    setCapVal(value);
+  };
+
   return (
     <form action="" onSubmit={() => handleSubmit(event)}>
       <div className="mb-5">
@@ -79,7 +86,18 @@ const Form = () => {
         {failed && <p className="text-red-800 font-medium mt-2">Gagal mengirim pesanan, periksa kembali jaringan anda..!</p>}
       </div>
 
-      <Button className="w-full">ORDER</Button>
+      {/* HoneyPot Field */}
+
+      <div style={{ display: "none" }}>
+        <label htmlFor="honeypot">Honeypot</label>
+        <input type="text" name="honeypot" id="honeypot" />
+      </div>
+
+      <ReCAPTCHA onChange={handleCaptchaChange} sitekey={import.meta.env.VITE_RECAPTCHA_SECRET_KEY} />
+
+      <Button disabled={!capVal} className="w-full mt-5">
+        ORDER
+      </Button>
     </form>
   );
 };

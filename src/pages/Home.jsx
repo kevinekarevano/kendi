@@ -1,6 +1,6 @@
 import { Button } from "../components/ui/button";
 import Form from "../components/Form";
-import { useRef} from "react";
+import { useRef } from "react";
 import Marquee from "../components/ui/Marquee";
 import Menu from "../components/Menu";
 
@@ -12,6 +12,7 @@ function Home() {
   const handleButton = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
+
 
   return (
     <div className="bg-[#FEF2E8]  h-full relative">
