@@ -20,15 +20,21 @@ const DetailMenu = () => {
   if (!data) {
     return (
       <div className="bg-[#FEF2E8] h-screen flex  flex-col justify-center items-center">
-        <img className="w-24 my-5" src="/image/logo_kendi.svg" alt="" />
-        <h1 className="text-2xl font-bold">Tidak ada produk 🥲</h1>
+        <div className="w-full h-screen z-0 fixed pattern-dots pattern-zinc-300 pattern-bg-transparent pattern-opacity-60 pattern-size-4"></div>
+
+        <div className="flex flex-col items-center justify-center relative">
+          <img className="w-24 my-5" src="/image/logo_kendi.svg" alt="" />
+          <h1 className="text-2xl font-bold">Tidak ada produk 🥲</h1>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-[#FEF2E8]  h-full">
-      <div className="container p-5 flex justify-center ">
+    <div className="bg-[#FEF2E8]  h-screen">
+      <div className="w-full h-screen z-0 fixed pattern-dots pattern-zinc-300 pattern-bg-transparent pattern-opacity-60 pattern-size-4"></div>
+
+      <div className="container p-5 flex justify-center relative ">
         <div className="flex flex-col justify-center items-center">
           <img src="/image/logo_kendi.svg" alt="" />
 

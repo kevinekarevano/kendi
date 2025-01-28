@@ -49,10 +49,10 @@ function Home() {
           </div>
         </div>
       </div>
-
-      <footer className="flex justify-center pb-2 items-center">
-        <code className="text-sm">Made by 12 Teknik Komputer & Jaringan 1</code>
+      <footer className="flex justify-center relative pb-2 items-center">
+        <code className="text-xs md:text-sm">Made by <span className="italic ">12 Teknik Komputer & Jaringan 1</span> </code>
       </footer>
+
 
       <div className="md:hidden">
         <Marquee className="p-2" items={item} />
