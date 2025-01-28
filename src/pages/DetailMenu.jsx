@@ -1,6 +1,5 @@
 import { useParams } from "react-router";
 import { foodData } from "../foodData";
-import Marquee from "../components/ui/Marquee";
 import ImageCard from "@/components/ui/ImageCard";
 import { Link } from "react-router";
 
