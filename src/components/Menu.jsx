@@ -8,7 +8,7 @@ const Menu = () => {
         return (
           
           <Link key={id} to={`/detail/${item.id}`}>
-            <ImageCard className="cursor-pointer hover:scale-95 transition-all duration-300 hover:bg-orange-200" price={item.price} title={item.name} caption={item.name} imageUrl={item.imageUrl} />
+            <ImageCard className="cursor-pointer   hover:scale-95 transition-all duration-300 hover:bg-orange-200" price={item.price} title={item.name} caption={item.name} imageUrl={item.imageUrl} />
           </Link>
         );
       })}

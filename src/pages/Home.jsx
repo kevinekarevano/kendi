@@ -13,18 +13,20 @@ function Home() {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-
   return (
     <div className="bg-[#FEF2E8]  h-full relative">
       <div className="w-full h-screen z-0 fixed pattern-dots pattern-zinc-300 pattern-bg-transparent pattern-opacity-60 pattern-size-4"></div>
 
-      <div className="fixed right-5 opacity-95  transition-all animate-bounce  bottom-[85px] border-2 border-black  rounded-tr-3xl rounded-l-2xl  rounded-br-none bg-green-300 p-2 z-50">
-        <p className="font-semibold md:text-base text-xs">Kontak disini</p>
-      </div>
+      <a href="https://wa.me/6281211545130?text=Halo%20saya%20ingin%20order%20di%20KENDI.">
+        <div className="fixed right-5 opacity-95  transition-all animate-bounce  bottom-[85px] border-2 border-black  rounded-tr-3xl rounded-l-2xl  rounded-br-none bg-green-300 p-2 z-50">
+          <p className="font-semibold md:text-base text-xs">Kontak disini</p>
+        </div>
 
-      <div className="fixed shadow md:right-4 shadow-zinc-600 animate-bounce rounded-full w-14 p-3 z-50 right-1 bottom-5">
-        <img src="image/wa_logo.png" alt="" />
-      </div>
+        <div className="fixed shadow md:right-4 shadow-zinc-600 animate-bounce rounded-full w-14 p-3 z-50 right-1 bottom-5">
+          <img src="image/wa_logo.png" alt="" />
+        </div>
+      </a>
+
       <div className="md:hidden">
         <Marquee className="p-2" items={item} />
       </div>
@@ -50,9 +52,10 @@ function Home() {
         </div>
       </div>
       <footer className="flex justify-center relative pb-2 items-center">
-        <code className="text-xs md:text-sm">Made by <span className="italic ">12 Teknik Komputer & Jaringan 1</span> </code>
+        <code className="text-xs md:text-sm">
+          Made by <span className="italic ">12 Teknik Komputer & Jaringan 1</span>{" "}
+        </code>
       </footer>
-
 
       <div className="md:hidden">
         <Marquee className="p-2" items={item} />
