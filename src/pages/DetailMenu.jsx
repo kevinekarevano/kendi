@@ -30,6 +30,8 @@ const DetailMenu = () => {
     );
   }
 
+  <div />;
+
   return (
     <div className="bg-[#FEF2E8]  h-screen">
       <div className="w-full h-screen z-0 fixed pattern-dots pattern-zinc-300 pattern-bg-transparent pattern-opacity-60 pattern-size-4"></div>
@@ -50,10 +52,6 @@ const DetailMenu = () => {
           </Link>
         </div>
       </div>
-
-      {/* <div className="md:hidden">
-        <Marquee className="p-2" items={item} />
-      </div> */}
     </div>
   );
 };

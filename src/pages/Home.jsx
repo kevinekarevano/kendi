@@ -1,6 +1,6 @@
 import { Button } from "../components/ui/button";
 import Form from "../components/Form";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Marquee from "../components/ui/Marquee";
 import Menu from "../components/Menu";
 
@@ -9,15 +9,33 @@ const item = [, "KENDI", ".", "KENDI", ".", "KENDI", ".", "KENDI", "."];
 function Home() {
   const ref = useRef(null);
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   const handleButton = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="bg-[#FEF2E8]  h-full relative">
+      <div className="fixed flex justify-center items-center z-50 bg-opacity-90 w-full h-screen bg-black">
+        <div className="flex flex-col items-center">
+          <img className="" src="/image/logo_kendi.svg" alt="" />
+          <h1 className="text-4xl te font-bold text-yellow-600 my-4">ANNOUNCEMENT</h1>
+          <p className="text-white  text-center  font-light px-2 md:w-1/2   ">
+            Hari Penjualan Kendi (Kedai N'Cang Yadi) <span className="font-bold">diundur</span> sampai hari <span className="font-bold">Selasa</span>. Bagi yang sudah melakukan <span className="font-bold">Pre-Order</span> di website, mohon
+            maaf yang sebesar-besarnya, dan bagi yang sudah membayar Pre-Order akan <span className="font-bold">dikembalikan</span> secepatnya. Terimakasih
+          </p>
+        </div>
+      </div>
       <div className="w-full h-screen z-0 fixed pattern-dots pattern-zinc-300 pattern-bg-transparent pattern-opacity-60 pattern-size-4"></div>
 
-      <a href="https://wa.me/6281211545130?text=Halo%20saya%20ingin%20order%20di%20KENDI.">
+      {/* <a href="https://wa.me/6281211545130?text=Halo%20saya%20ingin%20order%20di%20KENDI.">
         <div className="fixed right-5 opacity-95  transition-all animate-bounce  bottom-[85px] border-2 border-black  rounded-tr-3xl rounded-l-2xl  rounded-br-none bg-green-300 p-2 z-50">
           <p className="font-semibold md:text-base text-xs">Kontak disini</p>
         </div>
@@ -25,7 +43,7 @@ function Home() {
         <div className="fixed shadow md:right-4 shadow-zinc-600 animate-bounce rounded-full w-14 p-3 z-50 right-1 bottom-5">
           <img src="image/wa_logo.png" alt="" />
         </div>
-      </a>
+      </a> */}
 
       <div className="md:hidden">
         <Marquee className="p-2" items={item} />
