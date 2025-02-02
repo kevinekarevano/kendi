@@ -48,10 +48,10 @@ const Form = () => {
     const handlePopUp = () => {
       Swal.fire({
         title: "Pesanan berhasil dikirim!",
-        html: `<p>Nama : ${name}</p>
-        <p>Kelas : ${kelas}</p>
-        <p>Pesanan : ${order}</p>
-        <p>Jam : ${moment().format("DD/MM/YYYY HH:mm A")}</p>`,
+        html: `<p>Nama : <b>${name}</b> </p>
+        <p>Kelas : <b>${kelas}</b> </p>
+        <p>Pesanan : <b>${order}</b> </p>
+        <p>Tanggal/waktu : <i>${moment().format("DD/MM/YYYY HH:mm A")}</i> </p>`,
         icon: "success",
       });
     };
