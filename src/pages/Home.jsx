@@ -33,7 +33,7 @@ function Home() {
         </div>
 
         <div className="fixed shadow md:right-4 shadow-zinc-600 animate-bounce rounded-full w-14 p-3 z-50 right-1 bottom-5">
-          <img src="image/wa_logo.png" alt="" />
+          <img className="w-8 h-8" src="image/wa_logo.png" alt="" />
         </div>
       </a>
 

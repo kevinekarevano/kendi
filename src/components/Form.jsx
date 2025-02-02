@@ -2,7 +2,7 @@ import { Input } from "./ui/Input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import Loaders from "./ui/Loaders";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import Swal from "sweetalert2";
 import moment from "moment";
@@ -20,38 +20,49 @@ const Form = () => {
   const [warning, setWarning] = useState(false);
   const [failed, setFailed] = useState(false);
   const [capVal, setCapVal] = useState(null);
-  // const [ipAddress, setIpAddress] = useState("");
+  const [userIp, setIpUser] = useState("");
 
-  ///// get IP Address
-  // const fetchIP = async () => {
-  //   try {
-  //     const response = await fetch("https://api.ipify.org");
+  /// get IP Address
+  const fetchIP = async () => {
+    try {
+      const response = await fetch("https://api.ipify.org");
+      const data = await response.text();
+      setIpUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchIP();
-  // }, []);
+  useEffect(() => {
+    fetchIP();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value.trim(); // validasi spasi
+    const secureName = name.replace(/<\/?[^>]+(>|$)/g, "");
+
     const kelas = e.target.kelas.value.trim();
+    const secureKelas = kelas.replace(/<\/?[^>]+(>|$)/g, "");
+
     const order = e.target.order.value.trim();
+    const secureOrder = order.replace(/<\/?[^>]+(>|$)/g, "");
+
     const number = e.target.number.value;
     const honeyPot = e.target.honeypot.value;
+
+    const userBattery = navigator.getBattery ? await navigator.getBattery() : null;
+    const batteryLevel = userBattery ? userBattery.level * 100 : null;
 
     const handlePopUp = () => {
       Swal.fire({
         title: "Pesanan berhasil dikirim!",
-        html: `<p>Nama : <b>${name}</b> </p>
-        <p>Kelas : <b>${kelas}</b> </p>
-        <p>Pesanan : <b>${order}</b> </p>
+        html: `<p>Nama : <b>${secureName}</b> </p>
+        <p>Kelas : <b>${secureKelas}</b> </p>
+
+        <p>Pesanan : <b>${secureOrder}</b> </p>
         <p>Tanggal/waktu : <i>${moment().format("DD/MM/YYYY HH:mm A")}</i> </p>`,
+
         icon: "success",
       });
     };
@@ -64,14 +75,14 @@ const Form = () => {
       setWarning(false);
     }
 
-    // console.log(name, kelas, order);
     setIsOrdered(false);
     setIsLoading(true);
+
     try {
       await fetch(import.meta.env.VITE_API_GOOGLE_SHEETS_2, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify([[name, kelas, order, number, new Date().toLocaleString()]]),
+        body: JSON.stringify([[name, kelas, order, number, new Date().toLocaleString(), navigator.userAgent, batteryLevel, userIp]]),
       });
 
       setIsOrdered(true);
@@ -107,7 +118,6 @@ const Form = () => {
         </label>
         <Input required placeholder="contoh: Agus Soleh" type="text" name="name" id="name" />
       </div>
-
       <div className="mb-5">
         <label className="font-bold" htmlFor="kelas">
           Kelas (Wajib)
