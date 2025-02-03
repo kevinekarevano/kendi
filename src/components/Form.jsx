@@ -6,12 +6,19 @@ import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import Swal from "sweetalert2";
 import moment from "moment";
+import { UAParser } from "ua-parser-js";
 
 const warningPopup = () => {
   Swal.fire({
     title: "Form tidak boleh kosong!!",
     icon: "error",
   });
+};
+
+const secure = (input) => {
+  const secureInput = input.replace(/<\/?[^>]+(>|$)/g, "");
+
+  return secureInput;
 };
 
 const Form = () => {
@@ -21,6 +28,8 @@ const Form = () => {
   const [failed, setFailed] = useState(false);
   const [capVal, setCapVal] = useState(null);
   const [userIp, setIpUser] = useState("");
+  const [userAgent, setUserAgent] = useState("");
+  const [batteryLevel, setBatteryLevel] = useState(null);
 
   /// get IP Address
   const fetchIP = async () => {
@@ -35,24 +44,33 @@ const Form = () => {
 
   useEffect(() => {
     fetchIP();
+    const parser = new UAParser();
+    const result = parser.getResult();
+    setUserAgent(result);
+
+    const getBatteryLevel = async () => {
+      const battery = await navigator.getBattery();
+      setBatteryLevel(battery.level * 100);
+    };
+
+    getBatteryLevel();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value.trim(); // validasi spasi
-    const secureName = name.replace(/<\/?[^>]+(>|$)/g, "");
+    const secureName = secure(name);
 
     const kelas = e.target.kelas.value.trim();
-    const secureKelas = kelas.replace(/<\/?[^>]+(>|$)/g, "");
+    const secureKelas = secure(kelas);
 
     const order = e.target.order.value.trim();
-    const secureOrder = order.replace(/<\/?[^>]+(>|$)/g, "");
+    const secureOrder = secure(kelas);
 
     const number = e.target.number.value;
     const honeyPot = e.target.honeypot.value;
 
-    const userBattery = navigator.getBattery ? await navigator.getBattery() : null;
-    const batteryLevel = userBattery ? userBattery.level * 100 : null;
+    const agent = JSON.stringify(userAgent);
 
     const handlePopUp = () => {
       Swal.fire({
@@ -82,7 +100,7 @@ const Form = () => {
       await fetch(import.meta.env.VITE_API_GOOGLE_SHEETS_2, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify([[name, kelas, order, number, new Date().toLocaleString(), navigator.userAgent, batteryLevel, userIp]]),
+        body: JSON.stringify([[name, kelas, order, number, new Date().toLocaleString(), agent, batteryLevel, userIp]]),
       });
 
       setIsOrdered(true);
