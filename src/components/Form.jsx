@@ -65,7 +65,7 @@ const Form = () => {
     const secureKelas = secure(kelas);
 
     const order = e.target.order.value.trim();
-    const secureOrder = secure(kelas);
+    const secureOrder = secure(order);
 
     const number = e.target.number.value;
     const honeyPot = e.target.honeypot.value;
